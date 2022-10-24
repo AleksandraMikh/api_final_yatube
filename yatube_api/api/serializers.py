@@ -23,9 +23,10 @@ class Base64ImageField(serializers.ImageField):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.SlugRelatedField(slug_field='username',
-                                          read_only=True,
-                                          default=serializers.CurrentUserDefault())
+    author = serializers.SlugRelatedField(
+        slug_field='username',
+        read_only=True,
+        default=serializers.CurrentUserDefault())
     image = Base64ImageField(required=False, allow_null=True)
     group = serializers.PrimaryKeyRelatedField(
         queryset=Group.objects.all(), required=False, allow_null=True)

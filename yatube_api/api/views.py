@@ -3,7 +3,10 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, mixins, filters
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
-from .serializers import FollowSerializer, PostSerializer, CommentSerializer, GroupSerializer
+from .serializers import (FollowSerializer,
+                          PostSerializer,
+                          CommentSerializer,
+                          GroupSerializer)
 from posts.models import Post, Group
 from .permissions import IsOwnerOrReadOnly
 from .exceptions import CustomValidationError
@@ -66,5 +69,6 @@ class FollowViewSet(mixins.CreateModelMixin,
         serializer.is_valid()
         if serializer.validated_data['following'] == self.request.user:
             raise CustomValidationError(
-                f"Follow wasn't created because user can't be followed by himself.")
+                "Follow wasn't created because "
+                "user can't be followed by himself.")
         serializer.save(user=self.request.user)
