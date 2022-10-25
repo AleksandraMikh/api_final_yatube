@@ -72,7 +72,5 @@ python3 manage.py runserver
 
 # Документация к api:
 
-Полный список эндпойнтов, примеров запросов и возможных ответов [в документации]
-
-[//]:
-[в документации]:<https://github.com/AleksandraMikh/api_final_yatube/blob/79b4f6e75aa1aa5d0af25a96fba5cbf508165889/redoc.yaml>
+Полный список эндпойнтов, примеров запросов и возможных ответов <code>[в документации](<https://github.com/AleksandraMikh/api_final_yatube/blob/79b4f6e75aa1aa5d0af25a96fba5cbf508165889/redoc.yaml>)
+</code>
