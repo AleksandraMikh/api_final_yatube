@@ -10,7 +10,6 @@ from .serializers import (FollowSerializer,
                           GroupSerializer)
 from posts.models import Post, Group
 from .permissions import IsOwnerOrReadOnly
-from .exceptions import CustomValidationError
 
 
 class PostViewSet(viewsets.ModelViewSet):
