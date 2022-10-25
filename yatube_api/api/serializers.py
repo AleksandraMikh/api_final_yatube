@@ -1,6 +1,8 @@
 import base64
 from django.core.files.base import ContentFile
 from rest_framework import serializers
+from rest_framework.validators import UniqueTogetherValidator
+from rest_framework.exceptions import ValidationError
 # from rest_framework.relations import SlugRelatedField
 from posts.models import Comment, Post, Group, Follow, User
 
@@ -60,7 +62,17 @@ class FollowSerializer(serializers.ModelSerializer):
         queryset=User.objects.all(),
         slug_field='username'
     )
+    validators = [UniqueTogetherValidator(
+        queryset=Follow.objects.all(),
+        fields=('user', 'following')
+    )
+    ]
 
     class Meta:
         fields = '__all__'
         model = Follow
+
+    def validate(self, attrs):
+        if self.context['request'].user == attrs['following']:
+            raise ValidationError('Подписка на самого себя запрещена.')
+        return super().validate(attrs)
